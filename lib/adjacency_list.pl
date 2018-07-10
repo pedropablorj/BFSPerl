@@ -5,6 +5,7 @@ use warnings;
 
 use Data::Dumper;
 
+# This script create a adjacency list to use it with a graph problem
 # Graph input in the for G(V,E) ex. ((1, 2), (2, 3));
 # User 1 to directed graphs and 0 for undirected
 #
