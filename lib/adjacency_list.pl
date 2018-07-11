@@ -30,10 +30,7 @@ sub create_list {
 	\%list;
 }
 
-my @p1 = (1,2);
-my @p2 = (2,3);
-my @G = (\@p1,\@p2);
-my $a_list = create_list(\@G, 0);
+my $a_list = create_list([[1,2],[2,3]], 0);
 
 print Dumper($a_list);
 
