@@ -30,10 +30,7 @@ sub create_matrix {
 	\@matrix;
 }
 
-my @p1 = (1,2);
-my @p2 = (2,3);
-my @G = (\@p1,\@p2);
-my $a_matrix = create_matrix(\@G, 0);
+my $a_matrix = create_matrix([[1,2],[2,3]], 0);
 
 print Dumper($a_matrix);
 
