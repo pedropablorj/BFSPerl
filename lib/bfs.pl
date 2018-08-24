@@ -50,24 +50,66 @@ sub initialize {
 }
 
 # Main method to execute BFS
-#
-#
+# Adjacency list -> Hash
+# Start Vertex -> Integer
 
 sub bfs {
+	my %graph_list = %{$_[0]};
+	my $start = $_[1];
+	my @q;
+	my $v;
+	my $y;
+	my @p;
+	my $edgenode;
 
+	unshift @q, $start;
+	$discovered{$start} = 1;
+
+	while(@q) {
+		$v = pop @q;
+		$processed{$v} = 1;
+		
+		process_vertex_early($v);
+
+		return 0 if (!(exists $graph_list{$v}));
+
+		@p = @{$graph_list{$v}};
+
+		for (@p) {
+			$y = $_;
+			
+			do { process_edge($v, $y); } unless ( $processed{$y});
+			do { unshift @q, $y; $discovered{$y} = 1; $parent{$y} = $v; } unless ( $discovered{$y} );
+		}
+
+		process_vertex_late($v);
+	}
 }
 
 # Methos to expliting traversal
 #
 #
+sub process_vertex_late {
+	print "VL: @_\n";
+}
+
+sub process_vertex_early {
+	print "VE: @_\n";
+}
+
+sub process_edge {
+	print "E: @_\n";
+}
 
 #Flows' Test
 my @p1 = (1,2);
 my @p2 = (2,3);
 my @G = (\@p1,\@p2);
 
-my $a_list = create_list(\@G);
+my $g_list = create_list(\@G);
 
-my @values = initialize($a_list);
+initialize($g_list);
 
-print Dumper([\%discovered,\%processed,\%parent]);
+bfs($g_list, 1);
+
+#print Dumper([\%discovered,\%processed,\%parent]);
